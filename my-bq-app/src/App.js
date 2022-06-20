@@ -1,34 +1,33 @@
 import * as React from 'react';
 import { Routes, Route } from "react-router-dom";
-import Home from '../src/components/Home.js';
-import Login from '../src/components/Login.js';
-import Register from '../src/components/Register.js';
 import NotFoundPage from '../src/components/NotFoundPage.js'
 import AuthProvider from './context/authContext.js';
 import CssBaseline from '@mui/material/CssBaseline';
-import Container from '@mui/material/Container';
 import SignInSide from './components/SignInPage.js';
-import SignUp from './components/SignUpPage.js';
-import Album from './components/Orders.js';
+import BreakfastPage from './components/BreakfastPage.js';
+import LunchPage from './components/LunchPage.js';
+import SummaryCheckoutPage from './components/SummaryCheckoutPage.js';
+import KitchenPage from './components/KitchenPage.js';
+import OrdersReadyPage from './components/OrdersReadyPage.js';
+import AdminPage from './components/AdminPage.js';
 
 function App() {
   return (
     <React.Fragment>
       <CssBaseline />
-      <Container maxWidth="sm">
         <AuthProvider>
           <Routes>
             {/* public routes */}
-            <Route path="/" element={<Home />}> </Route>
-            <Route path="/login" element= {<Login />}> </Route>
-            <Route path="/register" element= {<Register />}> </Route>
             <Route path="*" element= {<NotFoundPage />}> </Route>
             <Route path="/signInPage" element= {<SignInSide />}> </Route>
-            <Route path="/signUpPage" element= {<SignUp />}> </Route>
-            <Route path="/ordersPage" element= {<Album />}> </Route>
+            <Route path="/breakfastPage" element= {<BreakfastPage />}> </Route>
+            <Route path="/lunchPage" element= {<LunchPage />}> </Route>
+            <Route path="/summaryCheckoutPage" element= {<SummaryCheckoutPage />}> </Route>
+            <Route path="/kitchenPage" element= {<KitchenPage />}> </Route>
+            <Route path="/ordersReadyPage" element= {<OrdersReadyPage />}> </Route>
+            <Route path="/adminPage" element= {<AdminPage />}> </Route>
           </Routes>
         </AuthProvider>
-      </Container>
     </React.Fragment>
   );
 }
