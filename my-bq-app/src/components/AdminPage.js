@@ -14,7 +14,7 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Link from '@mui/material/Link';
-import MenuIcon from '@mui/icons-material/Menu';
+import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -98,7 +98,7 @@ function DashboardContent() {
   const navigate = useNavigate();
   const handleLogOut = async () => {
     await logOut()
-    navigate('/signInPage');
+    navigate('/');
  }
 
  const {user, logOut} = useAuth();
@@ -111,19 +111,10 @@ function DashboardContent() {
         <AppBar position="absolute" open={open} sx={{ bgcolor: "#342D29"}} >
           <Toolbar
             sx={{
-              pr: '24px', // keep right padding when drawer closed
+              pr: '24px', // keep right padding when drawer closed,
+              display:'flex', justifyContent:'space-around'
             }}
           >
-          <img src={Image3} sx={{ mr: 2 }} alt='oliveBranch' />
-          <Typography variant="h3" color="inherit" sx={{ mr: 2 }}>
-            Burger Queen
-          </Typography>
-          <Typography variant="h5" align="right" sx={{ mr: 2 }} >
-            Welcome {/* user.email */}
-          </Typography>
-          <Button variant="text" startIcon={<LogoutIcon/>} size="large"
-          sx={{  fontWeight:'bold', '&:hover': { color: "#EAFCFA" }}} 
-          onClick={handleLogOut}>Log Out</Button>
             <IconButton
               edge="start"
               color="inherit"
@@ -134,8 +125,18 @@ function DashboardContent() {
                 ...(open && { display: 'none' }),
               }}
             >
-              <MenuIcon />
+              <MenuRoundedIcon />
             </IconButton>
+          <img src={Image3} sx={{ mr: 2 }} alt='oliveBranch' />
+          <Typography variant="h3" color="inherit" sx={{ pr:20 }}>
+            Burger Queen
+          </Typography>
+          <Typography variant="h5" mr={20} >
+            Welcome {/* user.email */}
+          </Typography>
+          <Button variant="text" startIcon={<LogoutIcon/>} size="large"
+          sx={{ ml:40, fontWeight:'bold', '&:hover': { color: "#EAFCFA" }}} 
+          onClick={handleLogOut}>Log Out</Button>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
@@ -159,14 +160,12 @@ function DashboardContent() {
             <PeopleIcon />
             </ListItemIcon>
             <ListItemText primary="Employees" />
-            {/*<EmployeesTable />*/}
             </ListItemButton>
             <ListItemButton>
             <ListItemIcon>
             <RestaurantMenuIcon />
             </ListItemIcon>
             <ListItemText primary="Food Products" />
-            {/*<FoodTable />*/}
             </ListItemButton>
         </React.Fragment>
             <Divider sx={{ my: 1 }} />
@@ -186,20 +185,13 @@ function DashboardContent() {
         >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Grid container spacing={3}>
-              {/* Chart */}
-              <Grid item xs={12} md={8} lg={9}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
-                >
+            {/* Recent Orders */}
+            <Grid item xs={12}>
+                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+                  <EmployeesTable />
+                  <FoodTable />
                 </Paper>
               </Grid>
-            </Grid>
             <Copyright sx={{ pt: 4 }} />
           </Container>
         </Box>

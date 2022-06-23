@@ -48,7 +48,7 @@ export default function OrdersReadyPage() {
 
     const handleLogOut = async () => {
        await logOut()
-       navigate('/signInPage');
+       navigate('/');
     }
 
     const {user, logOut} = useAuth();
@@ -58,16 +58,16 @@ export default function OrdersReadyPage() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <AppBar position="relative" sx={{ bgcolor: "#342D29"}} >
-        <Toolbar >
+        <Toolbar sx={{display:'flex', justifyContent:'space-around'}} >
           <img src={Image3} sx={{ mr: 2 }} alt='oliveBranch' />
-          <Typography variant="h3" color="inherit" sx={{ mr: 2 }}>
+          <Typography variant="h3" color="inherit" sx={{ pr:20 }}>
             Burger Queen
           </Typography>
-          <Typography variant="h5" align="right" sx={{ mr: 2 }} >
+          <Typography variant="h5" mr={20} >
             Welcome {/* user.email */}
           </Typography>
           <Button variant="text" startIcon={<LogoutIcon/>} size="large"
-          sx={{  fontWeight:'bold', '&:hover': { color: "#EAFCFA" }}} 
+          sx={{ ml:60, fontWeight:'bold', '&:hover': { color: "#EAFCFA" }}} 
           onClick={handleLogOut}>Log Out</Button>
         </Toolbar>
       </AppBar>
@@ -82,7 +82,7 @@ export default function OrdersReadyPage() {
         >
           <Container maxWidth="sm">
             <Typography variant="h5" align="left" color="text.secondary" paragraph  sx={{ pt: 4 }}>
-              These food choices have been sent:
+              These food choices have been served:
             </Typography>
           </Container>
         </Box>
@@ -111,6 +111,9 @@ export default function OrdersReadyPage() {
                     <Typography >
                       $5.00 
                     </Typography>
+                    <Typography >
+                      Customer's name
+                    </Typography>
                   </CardContent>
                   <CardActions>
                   <Stack
@@ -124,7 +127,7 @@ export default function OrdersReadyPage() {
                      >Ready</Button>
                     <Button startIcon={<CheckIcon/>} size="small" sx={{'&:hover': { bgcolor: "#359A4B",
                      color:"whitesmoke" }, '&:active':{bgcolor: "#359A4B", color:"whitesmoke"}}} 
-                     >Sent</Button>  
+                     >Served</Button>  
                   </Stack>
                   </CardActions>
                 </Card>

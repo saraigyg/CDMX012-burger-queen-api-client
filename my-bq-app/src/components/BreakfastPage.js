@@ -49,7 +49,7 @@ export default function BreakfastPage() {
 
     const handleLogOut = async () => {
        await logOut()
-       navigate('/signInPage');
+       navigate('/');
     }
 
     const {user, logOut} = useAuth();
@@ -66,16 +66,16 @@ export default function BreakfastPage() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <AppBar position="relative" sx={{ bgcolor: "#342D29"}} >
-        <Toolbar >
+        <Toolbar sx={{display:'flex', justifyContent:'space-around'}}>
           <img src={Image3} sx={{ mr: 2 }} alt='oliveBranch' />
-          <Typography variant="h3" color="inherit" sx={{ mr: 2 }}>
+          <Typography variant="h3" color="inherit" sx={{ pr:20 }}>
             Burger Queen
           </Typography>
-          <Typography variant="h5" align="right" sx={{ mr: 2 }} >
+          <Typography variant="h5" mr={20} >
             Welcome {/* user.email */}
           </Typography>
           <Button variant="text" startIcon={<LogoutIcon/>} size="large"
-          sx={{  fontWeight:'bold', '&:hover': { color: "#EAFCFA" }}} 
+          sx={{ ml:60, fontWeight:'bold', '&:hover': { color: "#EAFCFA" }}} 
           onClick={handleLogOut}>Log Out</Button>
         </Toolbar>
       </AppBar>
@@ -108,7 +108,7 @@ export default function BreakfastPage() {
                 }}
               />
             <Stack
-              sx={{ pt: 4 }}
+              sx={{ mt: 5, pt: 4 }}
               direction="row"
               spacing={4}
               justifyContent="center"
@@ -127,7 +127,7 @@ export default function BreakfastPage() {
             </Typography>
           </Container>
         </Box>
-        <Container sx={{ py: 8 }} maxWidth="md">
+        <Container  maxWidth="md">
           {/* End hero unit */}
           <Grid container spacing={4}>
             {cards.map((card) => (
