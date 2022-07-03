@@ -21,24 +21,20 @@ const style = {
 
 const products = [
     {
-      name: 'Product 1',
-      desc: 'A nice thing',
+      foodName: 'Product 1',
       price: '$9.99',
     },
     {
-      name: 'Product 2',
-      desc: 'Another thing',
+      foodName: 'Product 2',
       price: '$3.45',
     },
     {
-      name: 'Product 3',
-      desc: 'Something else',
+      foodName: 'Product 3',
       price: '$6.51',
     },
     {
-      name: 'Product 4',
-      desc: 'Best thing of all',
-      price: '$14.11',
+      foodName: 'Product 4',
+      price: '$13',
     }
 ]
 
@@ -49,7 +45,7 @@ export default function SummaryCheckoutPage() {
 
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
+      <Button onClick={handleOpen} sx={{ fontWeight:'bold' }}>Order Summary</Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -58,6 +54,9 @@ export default function SummaryCheckoutPage() {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2" gutterBottom>
+            Customer's name
+          </Typography>
+          <Typography id="modal-modal-title" variant="h6" component="h3" gutterBottom>
             Order Summary
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
@@ -65,7 +64,7 @@ export default function SummaryCheckoutPage() {
       <List disablePadding>
         {products.map((product) => (
           <ListItem key={product.name} sx={{ py: 1, px: 0 }}>
-            <ListItemText primary={product.name} />
+            <ListItemText primary={product.foodName} />
             <Typography variant="body2">{product.price}</Typography>
           </ListItem>
         ))}
