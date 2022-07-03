@@ -20,11 +20,18 @@ import FastfoodIcon from '@mui/icons-material/Fastfood';
 import TextField from '@mui/material/TextField';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import InputAdornment from '@mui/material/InputAdornment';
+import Input from '@mui/material/Input';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/authContext.js";
-import Image2 from '../assets/blackCoffee.png';
+import doubleBurger from '../assets/doubleBurger.png';
+import frenchFries from '../assets/frenchFries.png';
+import onionRings from '../assets/onionRings.png';
+import regularBurger from '../assets/regularBurger.png';
+import soda from '../assets/soda.png';
+import waterBottle from '../assets/waterBottle.png';
 import Image3 from '../assets/oliveBranch.png';
+import SummaryCheckoutPage from './SummaryCheckoutPage.js';
 
 function Copyright() {
   return (
@@ -39,9 +46,59 @@ function Copyright() {
   );
 }
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8];
+const cards = [
+    {
+    id:'1',
+    img:regularBurger,
+    descr:'Regular Burger', 
+    price: '$10.00'
+    }, 
+    {
+    id:'2',
+    img: doubleBurger, 
+    descr:'Double Burger',
+    price: '$15.00'
+    }, 
+    {
+    id:'3',
+    img: frenchFries, 
+    descr:'French Fries',
+    price: '$5.00'
+    }, 
+    {
+    id:'4',
+    img: onionRings, 
+    descr:'Onion Rings',
+    price: '$5.00'
+    },
+    {
+    id:'5',
+    img: soda, 
+    descr:'Soda 500 mL',
+    price: '$7.00'
+    },
+    {
+    id:'6',
+    img: soda, 
+    descr:'Soda 700 mL',
+    price: '$10.00'
+    },
+    {
+    id:'7',
+    img: waterBottle, 
+    descr:'Water Bottle 500 mL',
+    price: '$7.00'
+    },
+    {
+    id:'8',
+    img: waterBottle, 
+    descr:'Water Bottle 700 mL',
+    price: '$10.00'
+    }
+  ];
 
 const theme = createTheme();
+const ariaLabel = { 'aria-label': 'description' };
 
 export default function LunchPage() {
   const navigate = useNavigate();
@@ -49,11 +106,34 @@ export default function LunchPage() {
 
     const handleLogOut = async () => {
        await logOut()
-       navigate('/signInPage');
+       navigate('/');
     }
 
     const {user, logOut} = useAuth();
     console.log(user);
+
+    const [countArray, setCountArray] = useState({}); //empty object
+
+    const setSumCards = (ind, num) => {
+     
+      let obj = countArray;
+      console.log(Object.keys(obj), 'keys');
+
+      // si las llaves de obj contienen el id, entonces, 
+      //obj[ind] vale obj[ind] + num
+      //si no, el obj[ind] vale 0+num  
+      if (Object.keys(obj).includes(ind)) {
+        obj[ind] = obj[ind] + num;
+      }
+      else {
+        obj[ind] = 0+num;
+      }
+      //si el obj[ind] está debajo de 0, entonces, el obj[ind] vale cero. 
+      if (obj[ind] < 0) {
+        obj[ind] = 0;
+      }
+      return {...obj};
+    };
 
     const [customer, setCustomer] = useState({
       customerName:'',
@@ -66,16 +146,16 @@ export default function LunchPage() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <AppBar position="relative" sx={{ bgcolor: "#342D29"}} >
-        <Toolbar >
+        <Toolbar sx={{display:'flex', justifyContent:'space-around'}} >
           <img src={Image3} sx={{ mr: 2 }} alt='oliveBranch' />
-          <Typography variant="h3" color="inherit" sx={{ mr: 2 }}>
+          <Typography variant="h3" color="inherit" sx={{ pr:20 }}>
             Burger Queen
           </Typography>
-          <Typography variant="h5" align="right" sx={{ mr: 2 }} >
+          <Typography variant="h5"  mr={20} >
             Welcome {/* user.email */}
           </Typography>
           <Button variant="text" startIcon={<LogoutIcon/>} size="large"
-          sx={{  fontWeight:'bold', '&:hover': { color: "#EAFCFA" }}} 
+          sx={{ ml:60, fontWeight:'bold', '&:hover': { color: "#EAFCFA" }}} 
           onClick={handleLogOut}>Log Out</Button>
         </Toolbar>
       </AppBar>
@@ -108,7 +188,7 @@ export default function LunchPage() {
                 }}
               />
             <Stack
-              sx={{ pt: 4 }}
+              sx={{  mt: 5, pt: 4 }}
               direction="row"
               spacing={4}
               justifyContent="center"
@@ -127,7 +207,7 @@ export default function LunchPage() {
             </Typography>
           </Container>
         </Box>
-        <Container sx={{ py: 8 }} maxWidth="md">
+        <Container  maxWidth="md">
           {/* End hero unit */}
           <Grid container spacing={4}>
             {cards.map((card) => (
@@ -140,27 +220,34 @@ export default function LunchPage() {
                     sx={{
                       // 16:9
                       bgcolor: "#342D29",
-                      p: '15%',
+                      p: "2%",
+                      height: 235,
+                      width: '100%'
                     }}
-                    image={Image2}
-                    alt="blackCoffee"
+                    image={card.img}
+                    title="Image title"
                   />
                   <CardContent sx={{ flexGrow: 1 }}>
                     <Typography gutterBottom variant="h5" component="h2" >
-                      Black Coffee
+                      {card.descr}
                     </Typography>
                     <Typography >
-                      $5.00 
+                      {card.price}
                     </Typography>
                   </CardContent>
                   <CardActions>
                   <Stack
-                  sx={{ pt: 4 }}
                   direction="row"
                   spacing={2}
-                  justifyContent="center">
-                    <Button size="small" sx={{ '&:hover': { bgcolor: "#E7F5F4" } }} >View</Button>
-                    <Button size="small" sx={{ '&:hover': { bgcolor: "#E7F5F4" } }} >Remove</Button>
+                  justifyContent="left">
+                    <Button size="small" sx={{maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px', 
+                    bgcolor: 'primary.main', color: 'whitesmoke', '&:hover': {bgcolor: 'primary.main', 
+                    color: 'whitesmoke' }}} onClick={() => setCountArray(setSumCards(card.id, -1))}>-</Button>
+                    <Input inputProps={{ min: 0, ariaLabel, style: { textAlign: 'center', fontWeight: 'bold', width: '30px' }}} 
+                    placeholder="0"  value={countArray[card.id]}/>
+                    <Button size="small" sx={{maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px', 
+                    bgcolor: 'primary.main', color: 'whitesmoke', '&:hover': {bgcolor: 'primary.main', 
+                    color: 'whitesmoke' }}} onClick={() => setCountArray(setSumCards(card.id, 1))} >+</Button>
                   </Stack>
                   </CardActions>
                 </Card>
@@ -175,7 +262,7 @@ export default function LunchPage() {
               justifyContent="center"
             >
               <Button variant="contained" size='large' sx={{ bgcolor:"#342D29"}}>Place Order</Button>
-              
+              <SummaryCheckoutPage />
             </Stack>
       </main>
       {/* Footer */}

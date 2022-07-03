@@ -32,7 +32,7 @@ export const ProtectedRoutes = () => {
     if(role === "waiter") {
         return (
             <Routes>
-                <Route path="/signInPage" element={<SignInSide />}></Route>
+                <Route path="/" element={<SignInSide />}></Route>
                 <Route path="/breakfastPage" element={<BreakfastPage />}></Route>
                 <Route path="/lunchPage" element={<LunchPage />}></Route>
                 <Route path="/ordersReadyPage" element={<OrdersReadyPage />}></Route>

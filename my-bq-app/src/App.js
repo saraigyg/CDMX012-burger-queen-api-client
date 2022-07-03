@@ -19,7 +19,7 @@ function App() {
           <Routes>
             {/* public routes */}
             <Route path="*" element= {<NotFoundPage />}> </Route>
-            <Route path="/signInPage" element= {<SignInSide />}> </Route>
+            <Route path="/" element= {<SignInSide />}> </Route>
             <Route path="/breakfastPage" element= {<BreakfastPage />}> </Route>
             <Route path="/lunchPage" element= {<LunchPage />}> </Route>
             <Route path="/summaryCheckoutPage" element= {<SummaryCheckoutPage />}> </Route>

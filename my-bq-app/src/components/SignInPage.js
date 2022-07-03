@@ -9,7 +9,6 @@ import Grid from '@mui/material/Grid';
 import CssBaseline from '@mui/material/CssBaseline';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
-import { Toolbar } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Image from '../assets/bq.png';
 import Image3 from '../assets/oliveBranch.png';
@@ -96,9 +95,17 @@ const handleSubmitError = async (e) => {
             backgroundPosition: 'center',
           }}
         />
-          {/*<Toolbar>
-          <img src={Image3} sx={{ width:20, height:20 }} alt="oliveBranch"  />
-        </Toolbar>*/}
+        <Box
+        component="img"
+        sx={{
+          mt:10,
+          ml:5,
+          display:'flex',
+          position:'absolute'
+        }}
+        alt=""
+        src={Image3}
+      />
           <Typography
            gutterBottom
            variant="h1"
